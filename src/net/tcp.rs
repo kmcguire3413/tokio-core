@@ -616,6 +616,7 @@ impl<'a> AsyncRead for &'a TcpStream {
 
 impl<'a> AsyncWrite for &'a TcpStream {
     fn shutdown(&mut self) -> Poll<(), io::Error> {
+        <TcpStream>::shutdown(*self, Shutdown::Write);
         Ok(().into())
     }
 
